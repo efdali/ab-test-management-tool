@@ -1,6 +1,6 @@
 {
   "name": "ab-test-management-tool",
-  "description": "This tool helps you to manage A/B Tests",
+  "description": "This tool helps you to manage your A/B tests",
   "version": "1.0.0",
   "author": "Efdal İncesu",
   "license": "MIT",
