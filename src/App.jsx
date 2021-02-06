@@ -92,27 +92,38 @@ function App() {
   }, [cookieDomain, url]);
 
   return (
-    <div className="App">
-      <h1>
-        AB Test Variations Tool - <span>{url}</span> - <b>{expCookie}</b>
-      </h1>
+    <div className="app">
+      <h1>AB Test Management Tool</h1>
+      <div className="info-area">
+        <div className="info">
+          <span className="label">URL</span>
+          <span>{url}</span>
+        </div>
+        <div className="info">
+          <span className="label">Test ID</span>
+          <span>{expCookie}</span>
+        </div>
+      </div>
       <form onSubmit={changeVariationNumber}>
-        <input placeholder="Test Id" type="hidden" />
-        <input
-          placeholder="Variation Number"
-          value={variationTestId}
-          onChange={({ target }) => setVariationTestId(target.value)}
-        />
-        <button type="submit">Change Variation</button>
+        <span className="label">Variation</span>
+        <div className="row">
+          <input
+            placeholder="0"
+            value={variationTestId}
+            onChange={({ target }) => setVariationTestId(target.value)}
+            type="number"
+          />
+          <button type="submit">Change Variation</button>
+        </div>
       </form>
-      <hr />
-      {userInTest ? (
-        <button onClick={exitTestHandler}>Exit Test</button>
-      ) : (
-        <button onClick={enterTestHandler}>Enter Test</button>
-      )}
-
-      <button onClick={reloadPage}>Clear Cache</button>
+      <div className="button-container">
+        {userInTest ? (
+          <button onClick={exitTestHandler}>Exit Test</button>
+        ) : (
+          <button onClick={enterTestHandler}>Enter Test</button>
+        )}
+        <button onClick={reloadPage}>Clear Cache</button>
+      </div>
     </div>
   );
 }

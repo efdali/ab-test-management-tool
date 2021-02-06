@@ -1,13 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+.app {
+  width: 410px;
+  min-height: 480px;
+  padding: 35px;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 48px;
+}
+.info,
+form {
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+span.label {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+form {
+  margin-bottom: 45px;
+}
+
+form .row {
+  display: flex;
+  align-items: center;
+}
+
+form input {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 42px;
+  height: 32px;
+  margin-right: 20px;
+  text-align: center;
+  outline: 0;
+}
+
+form button {
+  background-color: #22ac00;
+  border-radius: 5px;
+  width: 156px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container button {
+  padding: 15px 18px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.button-container button:first-child {
+  margin-right: 20px;
+  background-color: #0068c9;
+}
+.button-container button:last-child {
+  background-color: #da2902;
 }
