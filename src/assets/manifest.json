@@ -1,6 +1,6 @@
 {
   "name": "A/B Test Management Tool",
-  "description": "this tool help you that management A/B Tests",
+  "description": "this tool helps you to manage your A/B Tests",
   "version": "0.1",
   "manifest_version": 2,
   "browser_action": {
