@@ -1,0 +1,14 @@
+{
+  "name": "A/B Test Management Tool",
+  "description": "this tool help you that management A/B Tests",
+  "version": "0.1",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "assets/icon.png"
+  },
+  "permissions": ["activeTab", "<all_urls>", "cookies", "browsingData"],
+  "icons": {
+    "128": "assets/icon.png"
+  }
+}
