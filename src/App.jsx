@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 function App() {
   const [url, setUrl] = useState('');
-  const [expCookie, setExpCookie] = useState('');
+  const [expCookie, setExpCookie] = useState([]);
+  const [selectedExp, setSelectedExp] = useState('');
   const [cookieDomain, setCookieDomain] = useState('');
   const [variationTestId, setVariationTestId] = useState('');
   const [userInTest, setUserInTest] = useState(false);
@@ -14,10 +15,22 @@ function App() {
   }, []);
 
   const changeExpState = useCallback((cookie) => {
-    setExpCookie(cookie.value);
+    if (cookie.value.includes('!')) {
+      setExpCookie(cookie.value.split('!'));
+    } else {
+      setExpCookie([cookie.value]);
+    }
     setCookieDomain(cookie.domain);
-    setVariationTestId(cookie.value.slice(-1));
   }, []);
+
+  useEffect(() => {
+    if (!selectedExp) {
+      setVariationTestId(0);
+      return;
+    }
+
+    setVariationTestId(selectedExp.slice(-1));
+  }, [selectedExp]);
 
   const reloadPage = () => {
     chrome?.browsingData?.removeCache({}, function () {});
@@ -49,10 +62,17 @@ function App() {
   const changeVariationNumber = useCallback(
     (e) => {
       e.preventDefault();
+      const newCookie = expCookie
+        .map((cookie) => {
+          return cookie === selectedExp
+            ? selectedExp.substr(0, selectedExp.length - 1) + variationTestId
+            : cookie;
+        })
+        .join('!');
       chrome?.cookies?.set(
         {
           name: '_gaexp',
-          value: expCookie.substr(0, expCookie.length - 1) + variationTestId,
+          value: newCookie,
           domain: cookieDomain,
           url,
         },
@@ -61,7 +81,7 @@ function App() {
         }
       );
     },
-    [expCookie, variationTestId, cookieDomain]
+    [expCookie, variationTestId, cookieDomain, selectedExp]
   );
 
   const enterTestHandler = useCallback(() => {
@@ -101,12 +121,24 @@ function App() {
         </div>
         <div className="info">
           <span className="label">Test ID</span>
-          <span>{expCookie}</span>
+          {expCookie.map((cookie) => (
+            <span className="test-item">{cookie}</span>
+          ))}
         </div>
       </div>
       <form onSubmit={changeVariationNumber}>
         <span className="label">Variation</span>
         <div className="row">
+          <select
+            value={selectedExp}
+            onChange={(e) => setSelectedExp(e.target.value)}
+            required
+          >
+            <option value="">Seçiniz</option>
+            {expCookie.map((cookie) => (
+              <option value={cookie}>{cookie}</option>
+            ))}
+          </select>
           <input
             placeholder="0"
             value={variationTestId}
